@@ -169,7 +169,7 @@ Commit: ${repo_url}/commit/${commit_sha}
             const content = fs.readFileSync(path);
 
             const target_name = `pr${context.issue.number}-${basename}`
-            const target_link = await uploadFile(target_name, content);
+            const target_link = `https://htmlpreview.github.io/?${await uploadFile(target_name, content)}`;
 
             body += `| [\`${target_name}\`](${target_link}) | ${commit_sha} |`
             body += "\n"
