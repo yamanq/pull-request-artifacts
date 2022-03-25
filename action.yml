@@ -23,6 +23,9 @@ inputs:
   artifacts-dir:
     description: 'Directory where to upload artifacts (defaults to root directory)'
     required: false
+  artifacts-prefix-url:
+    description: 'URL to prefix the artifacts url for HTML previewing (defaults to no prefix)'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

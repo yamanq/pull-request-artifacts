@@ -8,15 +8,16 @@ For example, you can use it to automatically upload APK or App Bundle to make it
 
 ## Parameters
 
-| parameter          | description                                                      |
-| ---------          | -----------                                                      |
-| `commit`           | Commit hash that triggered PR                                    |
-| `repo-token`       | Token for current repo (used to post PR comment)                 |
-| `artifacts`        | Whitespace-separated list of files to upload                     |
-| `artifacts-token`  | Token for artifacts repo (defaults to repo-token)                |
-| `artifacts-repo`   | Repo where to upload artifacts (defaults to current repo)        |
-| `artifacts-branch` | Branch where to upload artifacts (defaults to default branch)    |
-| `artifacts-dir`    | Directory where to upload artifacts (defaults to root directory) |
+| parameter              | description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| `commit`               | Commit hash that triggered PR                                               |
+| `repo-token`           | Token for current repo (used to post PR comment)                            |
+| `artifacts`            | Whitespace-separated list of files to upload                                |
+| `artifacts-token`      | Token for artifacts repo (defaults to repo-token)                           |
+| `artifacts-repo`       | Repo where to upload artifacts (defaults to current repo)                   |
+| `artifacts-branch`     | Branch where to upload artifacts (defaults to default branch)               |
+| `artifacts-dir`        | Directory where to upload artifacts (defaults to root directory)            |
+| `artifacts-prefix-url` | URL to prefix the artifacts url for HTML previewing (defaults to no prefix) |
 
 ## Example usage
 

@@ -52,10 +52,6 @@ async function run(): Promise<void> {
             artifacts_branch = repo.data.default_branch
         }
 
-        if (!artifacts_prefix_url) {
-            artifacts_prefix_url = 'https://htmlpreview.github.io/'
-        }
-
         core.info(`Artifacts repo: ${artifacts_owner}/${artifacts_repo}`)
         core.info(`Artifacts branch: ${artifacts_branch}`)
 
@@ -158,7 +154,12 @@ Commit: ${repo_url}/commit/${commit_sha}
             })
 
             const artifacts_repo_url = `https://github.com/${artifacts_owner}/${artifacts_repo}`
-            return `${artifacts_prefix_url}?${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}`
+            if (!artifacts_prefix_url) {
+                return `${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}?raw=true`
+            } else {
+                return `${artifacts_prefix_url}${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}`
+            }
+
         }
 
         const title = 'Pull request artifacts'
