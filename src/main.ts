@@ -12,6 +12,7 @@ async function run(): Promise<void> {
         let artifacts_owner_and_repo = core.getInput('artifacts-repo', {required: false})
         let artifacts_branch = core.getInput('artifacts-branch', {required: false})
         let artifacts_dir = core.getInput('artifacts-dir', {required: false})
+        let artifacts_prefix_url = core.getInput('artifacts-prefix-url', {required: false})
 
         if (!artifacts_token) {
             artifacts_token = local_token
@@ -49,6 +50,10 @@ async function run(): Promise<void> {
                 repo: artifacts_repo,
             })
             artifacts_branch = repo.data.default_branch
+        }
+
+        if (!artifacts_prefix_url) {
+            artifacts_prefix_url = 'https://htmlpreview.github.io/'
         }
 
         core.info(`Artifacts repo: ${artifacts_owner}/${artifacts_repo}`)
@@ -153,7 +158,7 @@ Commit: ${repo_url}/commit/${commit_sha}
             })
 
             const artifacts_repo_url = `https://github.com/${artifacts_owner}/${artifacts_repo}`
-            return `${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}?raw=true`
+            return `${artifacts_prefix_url}?${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}`
         }
 
         const title = 'Pull request artifacts'
@@ -169,7 +174,7 @@ Commit: ${repo_url}/commit/${commit_sha}
             const content = fs.readFileSync(path);
 
             const target_name = `pr${context.issue.number}-${basename}`
-            const target_link = `https://htmlpreview.github.io/?${await uploadFile(target_name, content)}`;
+            const target_link = await uploadFile(target_name, content);
 
             body += `| [\`${target_name}\`](${target_link}) | ${commit_sha} |`
             body += "\n"
