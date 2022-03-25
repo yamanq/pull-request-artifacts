@@ -154,6 +154,7 @@ Commit: ${repo_url}/commit/${commit_sha}
             })
 
             const artifacts_repo_url = `https://github.com/${artifacts_owner}/${artifacts_repo}`
+
             if (!artifacts_prefix_url) {
                 return `${artifacts_repo_url}/blob/${artifacts_branch}/${file_path}?raw=true`
             } else {
